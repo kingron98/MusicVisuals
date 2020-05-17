@@ -16,11 +16,11 @@ public abstract class Visual extends PApplet
 	private AudioInput ai;
 	private AudioPlayer ap;
 	private AudioBuffer ab;
-	private FFT fft;
+	public FFT fft;
 
 	private float amplitude  = 0;
 	private float smothedAmplitude = 0;
-	
+    
 	public void startMinim() 
 	{
 		minim = new Minim(this);
@@ -58,7 +58,7 @@ public abstract class Visual extends PApplet
 			total += abs(ab.get(i));
 		}
 		amplitude = total / ab.size();
-		smothedAmplitude = PApplet.lerp(smothedAmplitude, amplitude, 0.1f);
+		smothedAmplitude = PApplet.lerp(smothedAmplitude, amplitude, 0.5f);
 	}
 
 
@@ -136,5 +136,10 @@ public abstract class Visual extends PApplet
 
 	public AudioPlayer getAudioPlayer() {
 		return ap;
+	}
+
+	public int getSpecSize()
+	{
+		return fft.specSize();
 	}
 }
